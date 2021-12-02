@@ -7,6 +7,7 @@ async function getAdvert(urlAdvert) {
         // headless : false
     });
 
+
     const page = await browser.newPage();
     await clearBrowser ();
     await page.setViewport({ width: 1920, height: 1800 });
