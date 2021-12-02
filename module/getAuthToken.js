@@ -9,6 +9,7 @@ async function getAuthToken(login, password) {
     await page.setViewport({width: 1920, height: 1080});
     await clearBrowser ();
 
+
     await page.goto('https://www.olx.ua/uk/account/',{
         waitUntil: 'load',
         timeout: 0
