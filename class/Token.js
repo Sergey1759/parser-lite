@@ -7,7 +7,7 @@ class Token{
     constructor() {
         this.isUsed = false;
         this.#token = undefined;
-        this.userCountId = 0;
+        this.userCountId = 5;
         this.used = 0;
         this.isInit = false;
     }
@@ -38,7 +38,7 @@ class Token{
         } else if(this.isUsed == true && this.used >= 70){
             try {
                 let users = await apiUsers.getConfirmed();
-                let token = await getAuthToken(users[userIDX].email, users[userIDX].password);
+                let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
                 this.#token = token;
                 this.used = 0;
                 this.userCountId++;

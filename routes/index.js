@@ -17,15 +17,18 @@ let token = new Token();
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  let m = await getWithoutParserDataAdvert('https://www.olx.ua/d/obyavlenie/1-k-kvartira-zhk-semeynyy-komfort-44-m2-IDHkG9B.html#6ec24dd30d');
-  console.log(m);
   res.render('index', { title: 'Express' });
 });
 
 router.get('/getAdvert', async function(req, res, next) {
-  let params = req.body;
-  let countAdvert = 2;
-  let links = await getLinksByPageUrl('https://www.olx.ua/nedvizhimost/kvartiry/vinnitsa/');
+  let url = req.query.url || 'https://www.olx.ua/nedvizhimost/kvartiry/vinnitsa/';
+  console.log(req.query);
+  // return
+  let countAdvert =  req.query.countAdvert || 2 ;
+  countAdvert = Number.parseInt(countAdvert);
+  console.log(countAdvert);
+  // return
+  let links = await getLinksByPageUrl(url);
   links.splice(0,8);
   console.log(links);
 
@@ -33,7 +36,9 @@ router.get('/getAdvert', async function(req, res, next) {
 
   let arrayResponse = [];
   let i = 0;
-  while (arrayResponse.length < countAdvert){
+  while (arrayResponse.length < countAdvert && i < 5){
+    console.log(arrayResponse.length <= countAdvert)
+    console.log(arrayResponse.length <= i)
     try{
       let response = await getWithoutParserDataAdvert(links[i++]);
       let numberPhone = await getUserNumber(response.id,await token.getToken());
