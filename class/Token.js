@@ -7,7 +7,7 @@ class Token{
     constructor() {
         this.isUsed = false;
         this.#token = undefined;
-        this.userCountId = 5;
+        this.userCountId = 6;
         this.used = 0;
         this.isInit = false;
     }
