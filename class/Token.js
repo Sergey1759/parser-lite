@@ -20,6 +20,7 @@ class Token{
         }
     }
     async getToken(){
+        console.log(this.#token);
         // console.log('asidpoasodkpaos');
 
         if(this.isUsed == true && this.used < 70){
