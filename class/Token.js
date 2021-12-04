@@ -31,9 +31,9 @@ class Token{
             try {
                 let users = await apiUsers.getConfirmed();
                 console.log(users);
-                let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
-                this.isUsed = true;
-                return token;
+                // let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
+                // this.isUsed = true;
+                // return token;
             } catch (e) {
                 console.log(e);
                 console.log('error init token1');
