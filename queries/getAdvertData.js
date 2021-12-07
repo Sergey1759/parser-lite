@@ -5,18 +5,24 @@ async function  getWithoutParserDataAdvert(url){
         .then(response => {
             let html = parse(response.data);
 
+            const acc_created = html.querySelector('div[class="css-1bafgv4-Text eu5v0x0"]').innerText;
+            const posted = html.querySelector('span[data-cy="ad-posted-at"]').innerText;
+            // const city = html.querySelector('p[class="css-7xdcwc-Text eu5v0x0"]')[0]; //????
+
             const header = html.querySelector('h1[data-cy="ad_title"]').innerText;
             const price = html.querySelector('div[data-testid="ad-price-container"] h3').innerText;
             const description = html.querySelector('div[data-cy="ad_description"] div').innerText;
             const images = [...html.querySelectorAll('.css-158jbzd img')].map(el => {
                 let src = el.rawAttributes.src || el.rawAttributes['data-src'];
-                // console.log(el.rawAttributes);
                 return src.split(';')[0];
             });
             images.pop();
             let id = html.querySelector('div[data-cy="ad-footer-bar-section"] span').innerText;
             id = id.split(':')[1].trim();
-            const obj =  {header, price, description, id, images};
+            const obj =  {
+                url, acc_created, posted,
+                header, price, description, id, images
+            };
             console.log(obj);
             return obj;
         })

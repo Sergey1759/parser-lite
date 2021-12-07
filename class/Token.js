@@ -1,13 +1,14 @@
 const apiUsers = require("../api/UsersOlx");
 const {getAuthToken} = require("../module/getAuthToken");
 
+const startFromAccountPosition = 1
 
 class Token{
     #token;
     constructor() {
         this.isUsed = false;
         this.#token = undefined;
-        this.userCountId = 6;
+        this.userCountId = startFromAccountPosition;
         this.used = 0;
         this.isInit = false;
     }
