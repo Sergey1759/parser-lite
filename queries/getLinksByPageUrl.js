@@ -10,7 +10,7 @@ async function  getLinksByPageUrl(url){
             return urls;
         })
         .catch(err => {
-            console.log('wwwwwwwwwwwwwwwwwwwwww');
+         //   console.log('wwwwwwwwwwwwwwwwwwwwww');
             console.log(err)
         })
 }

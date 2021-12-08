@@ -26,12 +26,12 @@ class Token{
 
         if(this.isUsed == true && this.used < 70){
             this.used++;
-            console.log('this.used =' + this.used);
+          //  console.log('this.used =' + this.used);
             return this.#token;
         } else if(this.isUsed == false){
             try {
                 let users = await apiUsers.getConfirmed();
-                console.log(users);
+               // console.log(users);
                 let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
                 this.isUsed = true;
                 return token;

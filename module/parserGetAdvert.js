@@ -38,12 +38,12 @@ async function getAdvert(urlAdvert) {
         let id = document.querySelector('div[data-cy="ad-footer-bar-section"] span').innerText;
         id = id.split(':')[1].trim();
         const obj =  {header, price, description, images, id};
-        console.log(obj);
+      // console.log(obj);
         return obj;
     });
     // await new Promise(resolve => setTimeout(resolve, 30000));
 
-    console.log(data);
+    //console.log(data);
     await clearBrowser ();
 
     let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
