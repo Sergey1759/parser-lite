@@ -1,4 +1,7 @@
 function replaceNumber(text){
+    if (text == "undefined")
+        return text
+
     let number = text.replace(/\+/gm,'')
         .replace(/\s/gm,'')
         .split(' ')
@@ -6,6 +9,6 @@ function replaceNumber(text){
         .replace(/\-/gm,'')
         .replace('(','')
         .replace(')','');
-    return number.substr(number.length - 10);
+    return " +38" + number.substr(number.length - 10);
 }
 module.exports = {replaceNumber};
