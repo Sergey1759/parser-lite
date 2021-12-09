@@ -1,5 +1,5 @@
 function replaceNumber(text){
-    if (text == "undefined")
+    if (text === "undefined")
         return text
 
     let number = text.replace(/\+/gm,'')

@@ -42,6 +42,7 @@ class Token{
         } else if(this.isUsed == true && this.used >= 70){
             try {
                 let users = await apiUsers.getConfirmed();
+                console.log('users: ' + users.count);
                 let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
                 this.#token = token;
                 this.used = 0;
