@@ -23,6 +23,7 @@ router.get('/', async function(req, res, next) {
 router.get('/getAdvert', async function(req, res, next) {
   let url = req.query.url || 'https://www.olx.ua/nedvizhimost/kvartiry/vinnitsa/';
   console.log(req.query);
+  if (!url.includes('https://')) url = 'https://' + url;
   // return
   let countAdvert =  req.query.countAdvert || 2 ;
   countAdvert = Number.parseInt(countAdvert);
