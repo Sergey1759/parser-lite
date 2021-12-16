@@ -26,4 +26,27 @@ async function getUserNumber(id, token , user_agent = user_agents){
         });
 }
 
-module.exports  = {getUserNumber}
+async function getAdvertData(id, token , user_agent = user_agents){
+    let url = `https://www.olx.ua/api/v1/offers/${id}/`;
+
+    let options = {headers : {'authorization': `Bearer ${token}`, 'User-Agent': user_agent}};
+
+    return axios.get(url,options)
+        .then(response => {
+            console.log(response.data.params)
+            return response.data
+        })
+        .catch(error => {
+            try{
+                console.log(error)
+                if(error.response.statusText=='Unauthorized'){
+                    return `Unauthorized User`;
+                }
+            } catch (e) {
+                console.log(e)
+            }
+
+        });
+}
+
+module.exports  = {getUserNumber, getAdvertData}
