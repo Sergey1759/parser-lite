@@ -10,8 +10,10 @@ async function  getWithoutParserDataAdvert(url){
             location = location.split(/\\/gm).join('');
             location = JSON.parse(location)
 
+            let city = location['cityName']
+
             const acc_created = html.querySelector('div[class="css-1bafgv4-Text eu5v0x0"]').innerText;
-            const posted = html.querySelector('span[data-cy="ad-posted-at"]').innerText;
+            const created = html.querySelector('span[data-cy="ad-posted-at"]').innerText;
 
             const header = html.querySelector('h1[data-cy="ad_title"]').innerText;
             const price = html.querySelector('div[data-testid="ad-price-container"] h3').innerText;
@@ -24,8 +26,8 @@ async function  getWithoutParserDataAdvert(url){
             let id = html.querySelector('div[data-cy="ad-footer-bar-section"] span').innerText;
             id = id.split(':')[1].trim();
             const obj =  {
-                url, acc_created, posted,
-                header, price, description, id, images , location
+                url, acc_created, created, city,
+                header, price, description, id, images
             };
             return obj;
         })
