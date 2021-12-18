@@ -17,6 +17,7 @@ let token = new Token();
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
+  await token.getAllTokens();
   res.render('index', { title: 'Express' });
 });
 

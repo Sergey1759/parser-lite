@@ -1,0 +1,2 @@
+const Token = require('./Token');
+
