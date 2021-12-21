@@ -1,6 +1,8 @@
 function replaceNumber(text){
-    if (text === "undefined")
+    if (text === "undefined" || text === "orizedUser")
         return text
+
+    console.log(text);
 
     let number = text.replace(/\+/gm,'')
         .replace(/\s/gm,'')
