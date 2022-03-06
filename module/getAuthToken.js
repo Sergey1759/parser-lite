@@ -12,7 +12,7 @@ async function getAuthToken(login, password) {
 
     await page.goto('https://www.olx.ua/uk/account/',{
         waitUntil: 'load',
-        timeout: 30000
+        timeout: 50000
     });
 
     await clearBrowser ();
@@ -28,8 +28,15 @@ async function getAuthToken(login, password) {
     } catch (e){
         // console.log(e);
         // if (e.includes('TimeoutError:')) console.log('TimeoutError change proxy')
+        let html = await page.evaluate( async function () {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            let cookies = document.body.innerHTML;
+            return cookies;
+        });
+        let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
+        await browser.close();
         console.log(e);
-        throw error(`Navigation timeout change IP`);
+        throw new Error('Navigation timeout change IP' + html);
     }
 
     let token;
