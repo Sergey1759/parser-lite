@@ -7,7 +7,7 @@ class Token{
     constructor() {
         this.isUsed = false;
         this.#token = undefined;
-        this.userCountId = 6;
+        this.userCountId = 1;
         this.used = 0;
         this.isInit = false;
     }
@@ -21,7 +21,7 @@ class Token{
     }
     async getToken(){
         console.log(this.#token);
-        // console.log('asidpoasodkpaos');
+        console.log('asidpoasodkpaos');
 
         if(this.isUsed == true && this.used < 70){
             this.used++;
@@ -30,13 +30,14 @@ class Token{
         } else if(this.isUsed == false){
             try {
                 let users = await apiUsers.getConfirmed();
-                console.log(users);
+                // console.log(users);
                 let token = await getAuthToken(users[this.userCountId].email, users[this.userCountId].password);
                 this.isUsed = true;
                 return token;
             } catch (e) {
-                console.log(e);
+                // console.log(e);
                 console.log('error init token1');
+                return
             }
         } else if(this.isUsed == true && this.used >= 70){
             try {

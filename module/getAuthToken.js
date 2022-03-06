@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 async function getAuthToken(login, password) {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        // headless : false ,
+        // headless : false 
     });
     const page = await browser.newPage();
     await page.setViewport({width: 1920, height: 1080});
@@ -12,7 +12,7 @@ async function getAuthToken(login, password) {
 
     await page.goto('https://www.olx.ua/uk/account/',{
         waitUntil: 'load',
-        timeout: 0
+        timeout: 30000
     });
 
     await clearBrowser ();
@@ -30,11 +30,20 @@ async function getAuthToken(login, password) {
         // if (e.includes('TimeoutError:')) console.log('TimeoutError change proxy')
         throw error(`Navigation timeout change IP`);
     }
-    const token = await page.evaluate( async function () {
-        await new Promise(resolve => setTimeout(resolve, 5000));
-        let cookies = `${document.cookie}`.split('access_token')[1].split(';')[0].replace('=','');
-        return cookies;
-    });
+
+    let token;
+    try{
+        token = await page.evaluate( async function () {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            let cookies = `${document.cookie}`.split('access_token')[1].split(';')[0].replace('=','');
+            return cookies;
+        });
+    } catch(e){
+        let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
+        await browser.close();
+        throw new Error('Change IP');
+    }
+    
 
 
 

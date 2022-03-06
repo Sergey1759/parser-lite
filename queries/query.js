@@ -15,12 +15,15 @@ async function getUserNumber(id, token , user_agent = user_agents){
         })
         .catch(error => {
             try{
-                console.log(error)
+                // console.log(error)
+                console.log('An invalid token was passed to the request body, most likely a registration error. (queries/guery.js axios.get)')
+
                 if(error.response.statusText=='Unauthorized'){
                     return `Unauthorized User`;
                 }
             } catch (e) {
-                console.log(e)
+                console.log('An invalid token was passed to the request body, most likely a registration error. (queries/guery.js axios.get)')
+                // console.log(e)
             }
 
         });
