@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 async function getAuthToken(login, password) {
     const browser = await puppeteer.launch({
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--use-gl=egl'],
         // headless : false 
     });
     const page = await browser.newPage();
