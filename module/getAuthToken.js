@@ -28,6 +28,7 @@ async function getAuthToken(login, password) {
     } catch (e){
         // console.log(e);
         // if (e.includes('TimeoutError:')) console.log('TimeoutError change proxy')
+        console.log(e);
         throw error(`Navigation timeout change IP`);
     }
 
