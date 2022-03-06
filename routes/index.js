@@ -28,25 +28,27 @@ router.get('/getAdvert', async function(req, res, next) {
   let url = req.query.url || 'https://www.olx.ua/nedvizhimost/kvartiry/vinnitsa/';
   console.log(req.query);
   if (!url.includes('https://')) url = 'https://' + url;
-  // return
+
   let countAdvert =  req.query.countAdvert || 2 ;
   countAdvert = Number.parseInt(countAdvert);
-  console.log(countAdvert);
-  // return
+
   let links = await getLinksByPageUrl(url);
+
   links.splice(0,8);
   console.log(links);
 
-  if(!token.isInit) await token.init();
 
   let arrayResponse = [];
   let i = 0;
+  await token.createToken(3);
+  let array_tokens = token.getListTokens();
+  console.log(array_tokens);
   while (arrayResponse.length < countAdvert && i < 2){
-    console.log(arrayResponse.length <= countAdvert)
-    console.log(arrayResponse.length <= i)
+    // console.log(arrayResponse.length <= countAdvert)
+    // console.log(arrayResponse.length <= i)
     try{
       let response = await getWithoutParserDataAdvert(links[i++]);
-      let numberPhone = await getUserNumber(response.id,await token.getToken());
+      let numberPhone = await getUserNumber(response.id, 'token');
       numberPhone = replaceNumber(numberPhone);
       response.number = numberPhone;
       arrayResponse.push(response);

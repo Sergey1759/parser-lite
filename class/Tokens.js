@@ -53,5 +53,23 @@ class Token{
     changeIP(){
         console.log('IP WAS CHANGED');
     }
+
+    getListTokens(){
+        return this.tokensToArray();
+    }
+
+    tokensToArray(){
+        let buf = {...this.#tokens};
+        let arr = [];
+        for (const iterator in buf) {
+            console.log(iterator);
+            console.log(buf[iterator]);
+            console.log('------');
+            let obj = buf[iterator];
+            obj.email = iterator;
+            arr.push(obj);
+        }
+        return arr;
+    }
 }
 module.exports = {Token};
