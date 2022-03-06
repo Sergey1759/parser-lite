@@ -27,7 +27,9 @@ class Token{
         try{
             token = await getAuthToken(user.email, user.password);
         } catch(e){
+            console.log('e');
             console.log(e);
+            console.log('e');
             this.changeIP();
             // token = await getAuthToken(user.email, user.password);
             token = 'error';
