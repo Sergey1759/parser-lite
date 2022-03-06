@@ -39,9 +39,14 @@ async function getAuthToken(login, password) {
             return cookies;
         });
     } catch(e){
+        let html = await page.evaluate( async function () {
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            let cookies = document.body.innerHTML;
+            return cookies;
+        });
         let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
         await browser.close();
-        throw new Error('Change IP');
+        throw new Error('Change IP' + html);
     }
     
 
