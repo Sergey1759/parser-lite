@@ -8,7 +8,8 @@ class Token{
     constructor() {}
 
     async createToken(amount = 1){
-        let users = await apiUsers.getConfirmed();
+        let users = this.getUSERS();
+        // let users = await apiUsers.getConfirmed();
         let count = amount;
         for (let i = 0; i < users.length; i++) {
             if(count == 0) break;
@@ -73,5 +74,11 @@ class Token{
         }
         return arr;
     }
+    getUSERS(){
+        return [
+            {email: "cahesep248@ketchet.com", password: "Grtlove33$"},
+        ];
+    }
+    //pasword Grtlove33$
 }
 module.exports = {Token};

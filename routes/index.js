@@ -48,7 +48,7 @@ router.get('/getAdvert', async function(req, res, next) {
     // console.log(arrayResponse.length <= i)
     try{
       let response = await getWithoutParserDataAdvert(links[i++]);
-      let numberPhone = await getUserNumber(response.id, 'token');
+      let numberPhone = await getUserNumber(response.id, array_tokens[0].token);
       numberPhone = replaceNumber(numberPhone);
       response.number = numberPhone;
       arrayResponse.push(response);

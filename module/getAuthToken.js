@@ -11,7 +11,7 @@ async function getAuthToken(login, password) {
     await clearBrowser ();
 
     const recorder = new PuppeteerScreenRecorder(page);
-    await recorder.start(`./report/video/simple${new Date().getUTCDate()}.mp4`);
+    await recorder.start(`./report/video/simple${new Date().getTime()}.mp4`);
 
     await page.goto('https://www.olx.ua/uk/account/',{
         waitUntil: 'load',
