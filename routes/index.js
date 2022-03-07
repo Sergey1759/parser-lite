@@ -40,7 +40,7 @@ router.get('/getAdvert', async function(req, res, next) {
 
   let arrayResponse = [];
   let i = 0;
-  await token.createToken(3);
+  await token.createToken();
   let array_tokens = token.getListTokens();
   console.log(array_tokens);
   while (arrayResponse.length < countAdvert && i < 2){

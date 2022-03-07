@@ -25,6 +25,7 @@ async function getAuthToken(login, password) {
 
     try {
         await page.waitForNavigation({waitUntil: 'load'});
+        await page.screenshot({path: `screenshots/screenshot${new Date().getTime()}.png`});
     } catch (e){
         // console.log(e);
         // if (e.includes('TimeoutError:')) console.log('TimeoutError change proxy')
@@ -33,6 +34,7 @@ async function getAuthToken(login, password) {
             let cookies = document.body.innerHTML;
             return cookies;
         });
+        await page.screenshot({path: `screenshots/screenshot${new Date().getTime()}.png`});
         let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
         await browser.close();
         console.log(e);
@@ -41,6 +43,7 @@ async function getAuthToken(login, password) {
 
     let token;
     try{
+        await page.screenshot({path: `screenshots/screenshot${new Date().getTime()}.png`});
         token = await page.evaluate( async function () {
             await new Promise(resolve => setTimeout(resolve, 5000));
             let cookies = `${document.cookie}`.split('access_token')[1].split(';')[0].replace('=','');
@@ -52,12 +55,14 @@ async function getAuthToken(login, password) {
             let cookies = document.body.innerHTML;
             return cookies;
         });
+        await page.screenshot({path: `screenshots/screenshot${new Date().getTime()}.png`});
         let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
         await browser.close();
         throw new Error('Change IP' + html);
     }
     
 
+    await page.screenshot({path: `screenshots/screenshot${new Date().getTime()}.png`});
 
 
     let pages = await browser.pages(); await Promise.all(pages.map(page =>page.close())); await browser.close();
