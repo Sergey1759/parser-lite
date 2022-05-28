@@ -1,20 +1,19 @@
 const apiUsers = require("../api/UsersOlx");
-const { index } = require("../models/usersMailru");
 const {getAuthToken} = require("../module/getAuthToken");
 
 
-class Token{
+class Token {
     #tokens = {};
     constructor() {}
 
-    async createToken(amount = 1){
+    async createToken(amount = 1) { // create test to verify user email unique
         let users = this.getUSERS();
         // let users = await apiUsers.getConfirmed();
         let count = amount;
         for (let i = 0; i < users.length; i++) {
-            if(count == 0) break;
+            if (count == 0) break;
             const user = users[i];
-            if(!this.#tokens[user.email]){
+            if (!this.#tokens[user.email]) {
                 await this.recordToken(user);
                 count--;
             }
@@ -23,11 +22,11 @@ class Token{
         return this.#tokens;
     }
 
-    async emulationGetToken(user){ // NEED RECURSION FOR TRY CATCH FOR NORMAL CHANGING IP
+    async emulationGetToken(user) { // NEED RECURSION FOR TRY CATCH FOR NORMAL CHANGING IP
         let token;
-        try{
+        try {
             token = await getAuthToken(user.email, user.password);
-        } catch(e){
+        } catch (e) {
             console.log('e');
             console.log(e);
             console.log('e');
@@ -39,29 +38,29 @@ class Token{
         return token;
     }
 
-    tokenGetDate(){
+    tokenGetDate() {
         let created = new Date();
         let expired = created.getTime() + 86400000;
         expired = new Date(expired);
         return {created, expired};
     }
-    
-    async recordToken(user){
+
+    async recordToken(user) {
         let token = await this.emulationGetToken(user);
-        let {created, expired} =  this.tokenGetDate();
+        let {created, expired} = this.tokenGetDate();
         let tokenObject = {created, expired, token};
         this.#tokens[user.email] = tokenObject;
     }
 
-    changeIP(){
+    changeIP() {
         console.log('IP WAS CHANGED');
     }
 
-    getListTokens(){
+    getListTokens() {
         return this.tokensToArray();
     }
 
-    tokensToArray(){
+    tokensToArray() {
         let buf = {...this.#tokens};
         let arr = [];
         for (const iterator in buf) {
@@ -74,11 +73,13 @@ class Token{
         }
         return arr;
     }
-    getUSERS(){
+
+    getUSERS() {
         return [
             {email: "cahesep248@ketchet.com", password: "Grtlove33$"},
         ];
     }
-    //pasword Grtlove33$
+
 }
+
 module.exports = {Token};
