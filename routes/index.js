@@ -10,7 +10,10 @@ const apiUsers = require('../api/UsersOlx');
 const mongoose = require("mongoose");
 // const {Token} = require('../class/Token');
 const {Token} = require('../class/Tokens');
-mongoose.connect(`mongodb+srv://sergey:CBV4uXIKf39byH8K@cluster0.r6wfp.mongodb.net/olx?retryWrites=true`,{ useNewUrlParser: true, useUnifiedTopology: true } );
+
+mongoose.connect(`mongodb+srv://sergey:JobKWa7wKmDl09OZ@cluster0.r6wfp.mongodb.net/?retryWrites=true&w=majority`,{ useNewUrlParser: true, useUnifiedTopology: true } ).catch(err => {
+  console.log(err);
+});
 
 let token = new Token();
 
@@ -19,9 +22,11 @@ let token = new Token();
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   
-  let result2 = await token.createToken();
+  // let result2 = await token.createToken();
+  let result = await apiUsers.getAll().catch(err => console.log(err));
+  console.log(result);
   
-  res.render('index', { title: 'Express' , result2: JSON.stringify(result2)});
+  res.render('index', { title: 'Express'});
 });
 
 router.get('/getAdvert', async function(req, res, next) {
@@ -43,6 +48,8 @@ router.get('/getAdvert', async function(req, res, next) {
   await token.createToken();
   let array_tokens = token.getListTokens();
   console.log(array_tokens);
+  res.send(array_tokens);
+  return
   while (arrayResponse.length < countAdvert && i < 2){
     // console.log(arrayResponse.length <= countAdvert)
     // console.log(arrayResponse.length <= i)
